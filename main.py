@@ -1,5 +1,9 @@
 import sys
-from src import *
+from src import parse
+from src import fetch
+from src import patch
+from src import build
+from src import install
 
 
 if __name__ == "__main__":

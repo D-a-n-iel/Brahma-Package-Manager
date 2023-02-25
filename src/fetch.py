@@ -18,6 +18,8 @@ def http_download(url, expected_hash=None):
     with open(file_name, "wb") as output_file:
         output_file.write(response.content)
 
+    return file_name
+
 
 # Download file with git protocol
 # Library candidate to use: GitPython
