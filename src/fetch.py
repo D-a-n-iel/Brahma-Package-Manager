@@ -27,4 +27,7 @@ def http_download(url, expected_hash=None):
 
 
 def extract(archive):
-    unpack_archive(archive)
+    extracted_dir_name = archive.split(".")[0]
+    unpack_archive(archive, extract_dir=extracted_dir_name)
+
+    return extracted_dir_name

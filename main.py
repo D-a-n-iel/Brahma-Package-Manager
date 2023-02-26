@@ -12,9 +12,21 @@ if __name__ == "__main__":
         print("Usage: python", sys.argv[0], "[FILE]")
         sys.exit("Error: incorrect usage")
 
-    # config_file = open(sys.argv[1], "r")
-    # config = parse.parse_config(config_file)
-    # config_file.close()
+    config_file = open(sys.argv[1], "r")
+    config = parse.parse_config(config_file)
+    config_file.close()
 
-    # source = config["package"]["definition"]["source"]
-    # fetch.http_download(source["http-get"], source["hash"])
+    package_definition = config["package"]["definition"]
+
+    # If a config field is not present, the step is skipped
+    if "source" in package_definition:
+        """TODO fetch source"""
+
+    if "patch" in package_definition:
+        """TODO apply patches to source"""
+
+    if "build" in package_definition:
+        """TODO build"""
+
+    if "install" in package_definition:
+        """TODO install"""
