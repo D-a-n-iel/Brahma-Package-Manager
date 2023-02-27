@@ -12,6 +12,14 @@ from src import build
 from src import install
 from src import utils
 
+class ParseTests(unittest.TestCase):
+    def test_parse_config(self):
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        with utils.cd(test_path):
+            config_file = open("hello_world.json", "r")
+            config = parse.parse_config(config_file)
+            config_file.close()
+            self.assertTrue(config["package"]["name"] == "hello")
 
 class FetchTests(unittest.TestCase):
     def test_http_download(self):
@@ -34,6 +42,15 @@ class FetchTests(unittest.TestCase):
             # cleanup
             rmtree(dir_name)
 
+
+class PatchTests(unittest.TestCase):
+    """TODO"""
+
+class BuildTests(unittest.TestCase):
+    """TODO"""
+
+class InstallTests(unittest.TestCase):
+    """TODO"""
 
 if __name__ == "__main__":
     unittest.main()

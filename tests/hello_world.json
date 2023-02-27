@@ -4,8 +4,10 @@
         "version" : "2.12",
         "definition" : {
             "source": {
-                "http-get": "https://ftp.gnu.org/gnu/hello/hello-2.12.tar.gz",
-                "hash": "cf04af86dc085268c5f4470fbae49b18afbc221b78096aab842d934a76bad0ab"
+                "http-get": {
+                    "url": "https://ftp.gnu.org/gnu/hello/hello-2.12.tar.gz",
+                    "hash": "cf04af86dc085268c5f4470fbae49b18afbc221b78096aab842d934a76bad0ab"
+                }
             },
             "build": {
                 "system" : "gnu_build_system"
