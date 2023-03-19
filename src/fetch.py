@@ -1,5 +1,6 @@
 from hashlib import sha256
 from shutil import unpack_archive
+from git import Repo
 import sys
 import requests
 
@@ -21,9 +22,10 @@ def http_download(url, expected_hash=None):
     return file_name
 
 
-# Download file with git protocol
-# Library candidate to use: GitPython
-# def git_download(url):
+def git_fetch(url):
+    file_name = url.split("/")[-1]
+    Repo.clone_from(url, file_name)
+    return file_name
 
 
 def extract(archive):

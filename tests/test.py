@@ -44,6 +44,17 @@ class FetchTests(unittest.TestCase):
             # cleanup
             rmtree(dir_name)
 
+    def test_git_fetch(self):
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        with utils.cd(test_path):
+            dir_name = fetch.git_fetch(
+                "https://github.com/DDAVID22291/Brahma-Package-Manager"
+            )
+            self.assertTrue(os.path.isdir(dir_name))
+
+            # cleanup
+            rmtree(dir_name)
+
 
 class PatchTests(unittest.TestCase):
     """TODO"""
