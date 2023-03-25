@@ -11,3 +11,15 @@ def cd(path):
         yield
     finally:
         os.chdir(previous_path)
+
+
+def find_in_sys_path(name):
+    for files in os.listdir("."):
+        if name in files:
+            return os.path.join(".", name)
+
+    sys_search_paths = os.environ["XDG_CONFIG_HOME"].split(":")
+    for sys_path in sys_search_paths:
+        for root, _, files in os.walk(sys_path):
+            if name in files:
+                return os.path.join(root, name)

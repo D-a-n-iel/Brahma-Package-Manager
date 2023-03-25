@@ -1,9 +1,11 @@
 import sys
+import os
 from src import parse
 from src import fetch
 from src import patch
 from src import build
 from src import install
+from src import utils
 
 
 def install_package(definition):
@@ -38,16 +40,19 @@ def install_package(definition):
 
 
 if __name__ == "__main__":
-    # Program should be run with a config file as argument
+    # Program should be run with a config filename as argument
     if len(sys.argv) != 2:
-        print("Usage: python", sys.argv[0], "[FILE]")
+        print("Usage: python", sys.argv[0], "[CONFIG_NAME]")
         sys.exit("Error: incorrect usage")
 
-    config_file = open(sys.argv[1], "r")
+    path_to_config = utils.find_in_sys_path(sys.argv[1] + ".json")
+    config_file = open(path_to_config, "r")
     config = parse.parse_config(config_file)
     config_file.close()
 
     if "package" in config:
-        install_package(config["package"]["definition"])
+        definition = config["package"]["definition"]
+        # TODO: Make queue from DFS search of dependency graph
+        install_package(definition)
     else:
         """TODO handle system and service cases"""
