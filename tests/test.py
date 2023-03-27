@@ -91,5 +91,9 @@ class InstallTests(unittest.TestCase):
             rmtree(copied_dest)
 
 
+class UtilsTests(unittest.TestCase):
+    """TODO"""
+
+
 if __name__ == "__main__":
     unittest.main()

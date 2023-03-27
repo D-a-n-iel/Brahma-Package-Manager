@@ -1,5 +1,4 @@
 import sys
-import os
 from src import parse
 from src import fetch
 from src import patch
@@ -46,13 +45,11 @@ if __name__ == "__main__":
         sys.exit("Error: incorrect usage")
 
     path_to_config = utils.find_in_sys_path(sys.argv[1] + ".json")
-    config_file = open(path_to_config, "r")
-    config = parse.parse_config(config_file)
-    config_file.close()
+    config = parse.get_config(path_to_config)
 
     if "package" in config:
-        definition = config["package"]["definition"]
-        # TODO: Make queue from DFS search of dependency graph
-        install_package(definition)
+        install_stack = utils.dependency_bfs(config)
+        while install_stack:
+            install_package(install_stack.pop())
     else:
-        """TODO handle system and service cases"""
+        """TODO handle system case"""
