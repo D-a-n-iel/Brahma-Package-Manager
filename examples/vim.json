@@ -1,0 +1,14 @@
+{
+    "package": {
+        "name": "vim",
+        "version" : "any",
+        "definition" : {
+            "source": {
+                "git-fetch": { "url": "https://github.com/vim/vim.git" }
+            },
+            "build": {
+                "system" : "gnu_build_system"
+            }
+        }
+    }
+}
