@@ -16,7 +16,7 @@ Uses JSON configuration files that can define:
         "definition": {
             "source": {
                 "http-get": { "url": "",  "hash": ""},
-                "git-url": ""
+                "git-fetch": { "url": "", "branch": "" }
             },
             "patch": {
                 "replace-matches": { "str1": "", "str2": ""},
