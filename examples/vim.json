@@ -1,10 +1,10 @@
 {
     "package": {
         "name": "vim",
-        "version" : "any",
+        "version" : "9.0.1430",
         "definition" : {
             "source": {
-                "git-fetch": { "url": "https://github.com/vim/vim.git" }
+                "git-fetch": { "url": "https://github.com/vim/vim.git", "branch": "v9.0.1430" }
             },
             "build": {
                 "system" : "gnu_build_system"

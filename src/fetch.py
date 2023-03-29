@@ -22,9 +22,12 @@ def http_download(url, expected_hash=None):
     return file_name
 
 
-def git_fetch(url):
+def git_fetch(url, branch=None):
     file_name = url.split("/")[-1]
-    Repo.clone_from(url, file_name)
+    if not branch:
+        Repo.clone_from(url, file_name)
+    else:
+        Repo.clone_from(url, file_name, branch=branch)
     return file_name
 
 
