@@ -15,14 +15,17 @@ def cd(path):
 
 
 def find_in_sys_path(name):
+    if os.path.isfile(name):
+        return name
+
     for files in os.listdir("."):
-        if name in files:
-            return os.path.join(".", name)
+        if name + ".json" in files:
+            return os.path.join(".", name + ".json")
 
     config_path = os.path.join(os.environ["XDG_CONFIG_HOME"], "brahma-configs")
     for root, _, files in os.walk(config_path):
-        if name in files:
-            return os.path.join(root, name)
+        if name + ".json" in files:
+            return os.path.join(root, name + ".json")
 
 
 # TODO: modify BFS to re-append previously visited nodes
