@@ -2,6 +2,7 @@ from hashlib import sha256
 from shutil import unpack_archive
 from git import Repo
 import sys
+import os
 import requests
 
 
@@ -32,7 +33,9 @@ def git_fetch(url, branch=None):
 
 
 def extract(archive):
-    extracted_dir_name = archive.split(".")[0]
-    unpack_archive(archive, extract_dir=extracted_dir_name)
-
-    return extracted_dir_name
+    previous_dirs = os.listdir()
+    unpack_archive(archive)
+    current_dirs = os.listdir()
+    for directory in current_dirs:
+        if directory not in previous_dirs:
+            return directory
