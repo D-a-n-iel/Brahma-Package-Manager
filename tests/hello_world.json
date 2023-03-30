@@ -10,7 +10,8 @@
                 }
             },
             "build": {
-                "system" : "gnu_build_system"
+                "system" : "gnu_build_system",
+                "prefix" : "build"
             }
         }
     }
