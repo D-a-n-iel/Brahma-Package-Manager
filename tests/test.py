@@ -16,13 +16,16 @@ from src import utils
 class ParseTests(unittest.TestCase):
     def test_parse_config(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
+        test_file_path = os.path.join(test_path, "hello_world.json")
         with utils.cd(test_path):
-            config_file = open("hello_world.json", "r")
-            config = parse.parse_config(config_file)
-            config_file.close()
+            config = parse.get_config(test_file_path)
             self.assertTrue(config["package"]["name"] == "hello")
 
 
+# These are wrapper functions to widely used and tested python
+# libraries, what is being tested here is not their correctness,
+# but the wrapper functions'. ensuring their output is located in the
+# expected path.
 class FetchTests(unittest.TestCase):
     def test_http_download(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
