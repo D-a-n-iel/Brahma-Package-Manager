@@ -92,7 +92,22 @@ class InstallTests(unittest.TestCase):
 
 
 class UtilsTests(unittest.TestCase):
-    """TODO"""
+    def test_cd(self):
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        with utils.cd(test_path):
+            self.assertEqual(os.getcwd(), test_path)
+
+    def test_find_in_sys_path_full_path(self):
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        test_file = "hello_world.json"
+        with utils.cd(test_path):
+            utils.find_in_sys_path(os.path.join(test_path, test_file))
+
+    def test_find_in_sys_path_name(self):
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        test_file = "hello_world.json"
+        with utils.cd(test_path):
+            self.assertEqual(utils.find_in_sys_path("hello_world"), "./" + test_file)
 
 
 if __name__ == "__main__":
