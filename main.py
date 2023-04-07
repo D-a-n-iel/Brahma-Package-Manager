@@ -15,7 +15,7 @@ def fetching_step(source):
                 archive_name = fetch.http_download(http["url"], http["hash"])
                 return fetch.extract(archive_name)
             else:
-                print(
+                utils.warning(
                     """Warning: Fetching source with HTTP
                     but not verifying integrity with hash"""
                 )
@@ -29,7 +29,7 @@ def fetching_step(source):
             else:
                 return fetch.git_fetch(git["url"])
     except KeyError:
-        sys.exit("Error: malformed source section")
+        utils.error("malformed source section")
 
 
 def building_step(build_proc, build_dir):
@@ -48,7 +48,7 @@ def building_step(build_proc, build_dir):
                 commands = build_proc["commands"]
                 build.run_build_commands(commands)
     except KeyError:
-        sys.exit("Error: malformed build section")
+        utils.error("Error: malformed build section")
 
 
 def install_package(definition):

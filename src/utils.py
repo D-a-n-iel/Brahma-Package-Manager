@@ -1,4 +1,5 @@
 import os
+import sys
 from src import parse
 from contextlib import contextmanager
 
@@ -47,3 +48,16 @@ def dependency_bfs(config):
 
     bfs([], config)
     return config_list
+
+
+def error(err, msg=None):
+    print("Error:", err)
+    if msg:
+        print(msg)
+    sys.exit()
+
+
+def warning(warn, msg=None):
+    print("Warning:", warn)
+    if msg:
+        print(msg)
