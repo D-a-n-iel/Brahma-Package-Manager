@@ -31,6 +31,10 @@ Uses JSON configuration files that can define:
                 "file-copy": {"files": [""], "destination": ""},
                 "commands": [""]
             }
+            "service": {
+                "start_commands": [""],
+                "stop_commands": [""]
+            }
         }
     }
 }

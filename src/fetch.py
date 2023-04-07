@@ -3,7 +3,7 @@ from shutil import unpack_archive, rmtree
 from git import Repo
 import os
 import requests
-import utils
+from src import utils
 
 
 def http_download(url, expected_hash=None):
