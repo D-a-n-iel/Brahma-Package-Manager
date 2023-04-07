@@ -44,7 +44,7 @@ def dependency_bfs(config):
             for dep in current["package"]["definition"].get("depends", []):
                 if dep not in visited:
                     visited.append(dep)
-                    queue.append(parse.get_config(find_in_sys_path(dep + ".json")))
+                    queue.append(parse.get_config(find_in_sys_path(dep)))
 
     bfs([], config)
     return config_list
