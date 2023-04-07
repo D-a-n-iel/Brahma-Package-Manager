@@ -28,7 +28,6 @@ def find_in_sys_path(name):
             return os.path.join(root, name + ".json")
 
 
-# TODO: modify BFS to re-append previously visited nodes
 def dependency_bfs(config):
     config_list = []
 
