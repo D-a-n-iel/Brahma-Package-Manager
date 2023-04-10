@@ -1,14 +1,19 @@
 import subprocess
+import os
 
-# Given a pair of strings, every match of the first should
-# be replaced with the second in the entire source code
-def replace_matches(str1, str2):
-    """TODO"""
 
-# Given a source path and a destination, a symlink should
-# be created
+def replace_matches(src_dir, str1, str2):
+    for root, _, names in os.walk(src_dir):
+        for name in names:
+            path = os.path.join(root, name)
+            text = open(path).read()
+            if str1 in text:
+                open(path, "w").write(text.replace(str1, str2))
+
+
 def create_symlink(src, dst):
-    """TODO"""
+    os.symlink(src, dst)
+
 
 # commands as a list of strings to be executed
 def patch_commands(commands):
