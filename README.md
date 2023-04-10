@@ -19,8 +19,8 @@ Uses JSON configuration files that can define:
                 "git-fetch": { "url": "", "branch": "" }
             },
             "patch": {
-                "replace-matches": { "str1": "", "str2": ""},
-                "create-symlink": { "src": "", "dst": "" },
+                "replace-matches": [{ "str1": "", "str2": ""}],
+                "create-symlinks": [{ "src": "", "dst": "" }],
                 "commands": [""]
             },
             "build": {
