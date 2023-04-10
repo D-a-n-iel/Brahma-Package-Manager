@@ -92,7 +92,10 @@ if __name__ == "__main__":
         elif service_operation == "restart":
             """TODO"""
         else:
-            utils.error(f"unknown service operation {service_operation}")
+            utils.error(
+                f"unknown service operation {service_operation}",
+                "Available options: [start|stop|restart]",
+            )
     else:
         if "package" in config:
             install_stack = utils.dependency_bfs(config)
