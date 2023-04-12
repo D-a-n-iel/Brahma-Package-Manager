@@ -14,7 +14,7 @@ def run_gnu_build_system(prefix=None):
                 prefix = os.path.join(os.getcwd(), prefix)
             autotools_commands.append("./configure --prefix=" + prefix)
 
-    autotools_commands.append("make install")
+    autotools_commands.append("make")
 
     for command in autotools_commands:
         subprocess.run(command, shell=True)
