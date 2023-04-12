@@ -32,20 +32,35 @@ def fetching_step(source):
         utils.error("malformed source section")
 
 
-def building_step(build_proc, build_dir):
+def patching_step(patch_steps, patch_dir):
+    try:
+        with utils.cd(patch_dir):
+            if "replace-matches" in patch_steps:
+                for x in patch_steps["replace-matches"]:
+                    patch.replace_matches(patch_dir, x["str1"], x["str2"])
+            if "create-symlinks" in patch_steps:
+                for x in patch_steps["replace-matches"]:
+                    patch.create_symlink(x["src"], x["dst"])
+            if "commands" in patch_steps:
+                patch.patch_commands(patch_steps["commands"])
+    except KeyError:
+        utils.error("Error: malformed patch section")
+
+
+def building_step(build_steps, build_dir):
     try:
         with utils.cd(build_dir):
-            if "system" in build_proc:
-                system = build_proc["system"]
+            if "system" in build_steps:
+                system = build_steps["system"]
                 if system == "gnu_build_system":
-                    print(build_proc)
-                    if "prefix" in build_proc:
-                        build.run_gnu_build_system(build_proc["prefix"])
+                    print(build_steps)
+                    if "prefix" in build_steps:
+                        build.run_gnu_build_system(build_steps["prefix"])
                     else:
                         build.run_gnu_build_system()
 
-            if "commands" in build_proc:
-                commands = build_proc["commands"]
+            if "commands" in build_steps:
+                commands = build_steps["commands"]
                 build.run_build_commands(commands)
     except KeyError:
         utils.error("Error: malformed build section")
@@ -53,13 +68,13 @@ def building_step(build_proc, build_dir):
 
 def install_package(definition):
     if "source" in definition:
-        build_dir = fetching_step(definition["source"])
+        src_dir = fetching_step(definition["source"])
 
     if "patch" in definition:
-        """TODO apply patches to source"""
+        patching_step(definition["patch"], src_dir)
 
     if "build" in definition:
-        building_step(definition["build"], build_dir)
+        building_step(definition["build"], src_dir)
 
     if "install" in definition:
         """TODO install"""
