@@ -100,17 +100,26 @@ if __name__ == "__main__":
     config = parse.get_config(path_to_config)
 
     if service_operation:
-        if service_operation == "start":
-            """TODO"""
-        elif service_operation == "stop":
-            """TODO"""
-        elif service_operation == "restart":
-            """TODO"""
-        else:
+        service = config["package"]["definition"].get("service", [])
+        try:
+            if service_operation == "start":
+                service.service_commands(service["start_commands"])
+            elif service_operation == "stop":
+                service.service_commands(service["stop_commands"])
+            elif service_operation == "restart":
+                service.service_commands(service["start_commands"])
+                service.service_commands(service["stop_commands"])
+            else:
+                utils.error(
+                    f"unknown service operation {service_operation}",
+                    "Available options: [start|stop|restart]",
+                )
+        except KeyError:
             utils.error(
-                f"unknown service operation {service_operation}",
-                "Available options: [start|stop|restart]",
+                f"failed to run service operation {service_operation}",
+                "Fields missing from configuration file",
             )
+
     else:
         if "package" in config:
             install_stack = utils.dependency_bfs(config)
