@@ -67,6 +67,25 @@ def building_step(build_steps, build_dir):
         utils.error("Error: malformed build section")
 
 
+def installing_step(install_steps, work_dir):
+    try:
+        with utils.cd(work_dir):
+            if "system" in install_steps:
+                system = install_steps["system"]
+                if system == "gnu_make_install":
+                    install.gnu_make_install()
+
+            if "file-copy" in install_steps:
+                for x in install_steps["file-copy"]:
+                    install.file_copy(x["file"], x["destination"])
+
+            if "commands" in install_steps:
+                commands = install_steps["commands"]
+                install.install_commands(commands)
+    except KeyError:
+        utils.error("Error: malformed install section")
+
+
 def install_package(definition):
     if "source" in definition:
         src_dir = fetching_step(definition["source"])
@@ -78,7 +97,7 @@ def install_package(definition):
         building_step(definition["build"], src_dir)
 
     if "install" in definition:
-        """TODO install"""
+        installing_step(definition["install"], src_dir)
 
 
 if __name__ == "__main__":
