@@ -28,7 +28,8 @@ Uses JSON configuration files that can define:
                 "commands": [""]
             },
             "install": {
-                "file-copy": {"files": [""], "destination": ""},
+                "system": "",
+                "file-copy": [{ "file": "", "destination": "" }],
                 "commands": [""]
             }
             "service": {
