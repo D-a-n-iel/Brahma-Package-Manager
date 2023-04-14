@@ -34,6 +34,7 @@ Uses JSON configuration files that can define:
             "service": {
                 "start_commands": [""],
                 "stop_commands": [""]
+                "restart_commands": [""]
             }
         }
     }
