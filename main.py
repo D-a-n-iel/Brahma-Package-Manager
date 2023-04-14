@@ -5,6 +5,7 @@ from src import patch
 from src import build
 from src import install
 from src import utils
+from src import service
 
 
 def fetching_step(source):
@@ -100,15 +101,22 @@ if __name__ == "__main__":
     config = parse.get_config(path_to_config)
 
     if service_operation:
-        service = config["package"]["definition"].get("service", [])
+        services = config["package"]["definition"].get("service", [])
         try:
             if service_operation == "start":
-                service.service_commands(service["start_commands"])
+                service.service_commands(services["start_commands"])
             elif service_operation == "stop":
-                service.service_commands(service["stop_commands"])
+                service.service_commands(services["stop_commands"])
             elif service_operation == "restart":
-                service.service_commands(service["start_commands"])
-                service.service_commands(service["stop_commands"])
+                if service.get("restart_commands", []):
+                    service.service_commands(services["restart_commands"])
+                else:
+                    utils.warning(
+                        "no restart commands found for service",
+                        "Attempting restart with stop and start commands",
+                    )
+                    service.service_commands(services["stop_commands"])
+                    service.service_commands(services["start_commands"])
             else:
                 utils.error(
                     f"unknown service operation {service_operation}",
