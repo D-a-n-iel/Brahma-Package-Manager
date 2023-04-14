@@ -9,6 +9,10 @@ def install_commands(commands):
         subprocess.run(command, shell=True)
 
 
+def gnu_make_install():
+    subprocess.run("make install", shell=True)
+
+
 # files as a list of strings representing paths
 # each file should be copied to the destination directory
 def file_copy(files, destination):
