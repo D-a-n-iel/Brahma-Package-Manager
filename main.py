@@ -100,6 +100,35 @@ def install_package(definition):
         installing_step(definition["install"], src_dir)
 
 
+def service_handler(definition):
+    services = definition.get("service", [])
+    try:
+        if service_operation == "start":
+            service.service_commands(services["start-commands"])
+        elif service_operation == "stop":
+            service.service_commands(services["stop-commands"])
+        elif service_operation == "restart":
+            if services.get("restart-commands", []):
+                service.service_commands(services["restart-commands"])
+            else:
+                utils.warning(
+                    "no restart commands found for service",
+                    "Attempting restart with stop and start commands",
+                )
+                service.service_commands(services["stop-commands"])
+                service.service_commands(services["start-commands"])
+        else:
+            utils.error(
+                f"unknown service operation {service_operation}",
+                "Available options: [start|stop|restart]",
+            )
+    except KeyError:
+        utils.error(
+            f"failed to run service operation {service_operation}",
+            "Fields missing from configuration file",
+        )
+
+
 if __name__ == "__main__":
     # Program should be run with a config filename as argument
     argv = sys.argv
@@ -120,33 +149,7 @@ if __name__ == "__main__":
     config = parse.get_config(path_to_config)
 
     if service_operation:
-        services = config["package"]["definition"].get("service", [])
-        try:
-            if service_operation == "start":
-                service.service_commands(services["start-commands"])
-            elif service_operation == "stop":
-                service.service_commands(services["stop-commands"])
-            elif service_operation == "restart":
-                if service.get("restart-commands", []):
-                    service.service_commands(services["restart-commands"])
-                else:
-                    utils.warning(
-                        "no restart commands found for service",
-                        "Attempting restart with stop and start commands",
-                    )
-                    service.service_commands(services["stop-commands"])
-                    service.service_commands(services["start-commands"])
-            else:
-                utils.error(
-                    f"unknown service operation {service_operation}",
-                    "Available options: [start|stop|restart]",
-                )
-        except KeyError:
-            utils.error(
-                f"failed to run service operation {service_operation}",
-                "Fields missing from configuration file",
-            )
-
+        service_handler(config["package"]["definition"])
     else:
         if "package" in config:
             install_stack = utils.dependency_bfs(config)
