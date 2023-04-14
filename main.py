@@ -10,8 +10,8 @@ from src import service
 
 def fetching_step(source):
     try:
-        if "http-get" in source:
-            http = source["http-get"]
+        if "http-download" in source:
+            http = source["http-download"]
             if "hash" in http:
                 archive_name = fetch.http_download(http["url"], http["hash"])
                 return fetch.extract(archive_name)
@@ -53,7 +53,7 @@ def building_step(build_steps, build_dir):
         with utils.cd(build_dir):
             if "system" in build_steps:
                 system = build_steps["system"]
-                if system == "gnu_build_system":
+                if system == "gnu-build-system":
                     print(build_steps)
                     if "prefix" in build_steps:
                         build.run_gnu_build_system(build_steps["prefix"])
@@ -72,7 +72,7 @@ def installing_step(install_steps, work_dir):
         with utils.cd(work_dir):
             if "system" in install_steps:
                 system = install_steps["system"]
-                if system == "gnu_make_install":
+                if system == "gnu-make-install":
                     install.gnu_make_install()
 
             if "file-copy" in install_steps:
@@ -123,19 +123,19 @@ if __name__ == "__main__":
         services = config["package"]["definition"].get("service", [])
         try:
             if service_operation == "start":
-                service.service_commands(services["start_commands"])
+                service.service_commands(services["start-commands"])
             elif service_operation == "stop":
-                service.service_commands(services["stop_commands"])
+                service.service_commands(services["stop-commands"])
             elif service_operation == "restart":
-                if service.get("restart_commands", []):
-                    service.service_commands(services["restart_commands"])
+                if service.get("restart-commands", []):
+                    service.service_commands(services["restart-commands"])
                 else:
                     utils.warning(
                         "no restart commands found for service",
                         "Attempting restart with stop and start commands",
                     )
-                    service.service_commands(services["stop_commands"])
-                    service.service_commands(services["start_commands"])
+                    service.service_commands(services["stop-commands"])
+                    service.service_commands(services["start-commands"])
             else:
                 utils.error(
                     f"unknown service operation {service_operation}",

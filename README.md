@@ -15,7 +15,7 @@ Uses JSON configuration files that can define:
         "version": "",
         "definition": {
             "source": {
-                "http-get": { "url": "",  "hash": ""},
+                "http-download": { "url": "",  "hash": ""},
                 "git-fetch": { "url": "", "branch": "" }
             },
             "patch": {
@@ -33,9 +33,9 @@ Uses JSON configuration files that can define:
                 "commands": [""]
             }
             "service": {
-                "start_commands": [""],
-                "stop_commands": [""]
-                "restart_commands": [""]
+                "start-commands": [""],
+                "stop-commands": [""]
+                "restart-commands": [""]
             }
         }
     }

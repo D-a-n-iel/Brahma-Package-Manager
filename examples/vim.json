@@ -7,7 +7,7 @@
                 "git-fetch": { "url": "https://github.com/vim/vim.git", "branch": "v9.0.1430" }
             },
             "build": {
-                "system" : "gnu_build_system"
+                "system" : "gnu-build-system"
             }
         }
     }
