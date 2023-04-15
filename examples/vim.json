@@ -7,7 +7,11 @@
                 "git-fetch": { "url": "https://github.com/vim/vim.git", "branch": "v9.0.1430" }
             },
             "build": {
-                "system" : "gnu-build-system"
+                "system": "gnu-build-system",
+                "prefix": "build"
+            },
+            "install": {
+                "system": "gnu-make-install"
             }
         }
     }
