@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 from src import parse
 from src import fetch
@@ -141,7 +142,7 @@ if __name__ == "__main__":
     else:
         utils.error(
             "incorrect usage",
-            f"Usage:\tpython {argv[0]} [config]\n"
+            f"Usage:\t{argv[0]} [config]\n"
             f"\tpython {argv[0]} service [start|stop|restart] [config]",
         )
 
