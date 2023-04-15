@@ -12,6 +12,9 @@
             "build": {
                 "system" : "gnu-build-system",
                 "prefix" : "build"
+            },
+            "install": {
+                "system": "gnu-make-install"
             }
         }
     }
