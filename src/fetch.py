@@ -35,10 +35,12 @@ def git_fetch(url, branch=None):
     return file_name
 
 
-def extract(archive):
+def extract(archive, keep_archive=False):
     previous_dirs = os.listdir()
     unpack_archive(archive)
     current_dirs = os.listdir()
     for directory in current_dirs:
         if directory not in previous_dirs:
+            if not keep_archive:
+                os.remove(archive)
             return directory
