@@ -1,0 +1,24 @@
+{
+    "package": {
+        "name": "nginx-http-server",
+        "version" : "1.24",
+        "definition" : {
+            "source": {
+                "http-download": {
+                        "url": "https://nginx.org/download/nginx-1.24.0.tar.gz",
+                        "hash": "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+                }
+            },
+            "build": {
+                "system" : "gnu-build-system"
+            },
+            "install": {
+                "system": "gnu-make-install"
+            },
+            "service": {
+                "start-commands": [["/usr/local/nginx/sbin/nginx"]],
+                "stop-commands": [["/usr/local/nginx/sbin/nginx", "-s", "stop"]]
+            }
+        }
+    }
+}
