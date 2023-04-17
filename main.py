@@ -101,7 +101,7 @@ def install_package(definition):
         installing_step(definition["install"], src_dir)
 
 
-def service_handler(definition):
+def service_handler(definition, service_operation):
     services = definition.get("service", [])
     try:
         if service_operation == "start":
@@ -130,7 +130,7 @@ def service_handler(definition):
         )
 
 
-if __name__ == "__main__":
+def main():
     # Program should be run with a config filename as argument
     argv = sys.argv
     if len(argv) == 2:
@@ -150,11 +150,13 @@ if __name__ == "__main__":
     config = parse.get_config(path_to_config)
 
     if service_operation:
-        service_handler(config["package"]["definition"])
+        service_handler(config["package"]["definition"], service_operation)
     else:
         if "package" in config:
             install_stack = utils.dependency_bfs(config)
             while install_stack:
                 install_package(install_stack.pop()["package"]["definition"])
-        else:
-            """TODO handle system case"""
+
+
+if __name__ == "__main__":
+    main()
