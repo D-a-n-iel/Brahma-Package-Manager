@@ -88,6 +88,7 @@ def installing_step(install_steps, work_dir):
 
 
 def install_package(definition):
+    src_dir = "."
     if "source" in definition:
         src_dir = fetching_step(definition["source"])
 
