@@ -76,6 +76,10 @@ def installing_step(install_steps, work_dir):
                 if system == "gnu-make-install":
                     install.gnu_make_install()
 
+            if "make-executable" in install_steps:
+                for x in install_steps["make-executable"]:
+                    install.make_executable(x)
+
             if "file-copy" in install_steps:
                 for x in install_steps["file-copy"]:
                     install.file_copy(x["file"], x["destination"])

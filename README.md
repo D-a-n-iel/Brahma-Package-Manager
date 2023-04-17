@@ -29,6 +29,7 @@ Uses JSON configuration files that can define:
             },
             "install": {
                 "system": "",
+                "make-executable": [""],
                 "file-copy": [{ "file": "", "destination": "" }],
                 "commands": [""]
             }
