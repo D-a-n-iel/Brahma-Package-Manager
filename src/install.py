@@ -13,12 +13,9 @@ def gnu_make_install():
     subprocess.run("make install", shell=True)
 
 
-# files as a list of strings representing paths
-# each file should be copied to the destination directory
-def file_copy(files, destination):
-    os.makedirs(destination, exist_ok=True)
+def file_copy(source, destination):
+    shutil.copy(source, destination)
 
-    for file_path in files:
-        file_name = os.path.basename(file_path)
-        destination_path = os.path.join(destination, file_name)
-        shutil.copy(file_path, destination_path)
+
+def make_executable(path):
+    os.chmod(path, 0o755)
