@@ -94,7 +94,7 @@ def installing_step(install_steps, work_dir):
 def install_package(definition):
     src_dir = "."
     if "source" in definition:
-        src_dir = fetching_step(definition["source"])
+        src_dir = fetching_step(definition["source"]) or src_dir
 
     if "patch" in definition:
         patching_step(definition["patch"], src_dir)
