@@ -12,6 +12,11 @@ from src import build
 from src import install
 from src import utils
 
+# These are wrapper functions to widely used and tested python
+# libraries, what is being tested here is not their correctness,
+# but the wrapper functions'. ensuring their output is located in the
+# expected path.
+
 
 class ParseTests(unittest.TestCase):
     def test_parse_config(self):
@@ -22,10 +27,6 @@ class ParseTests(unittest.TestCase):
             self.assertTrue(config["package"]["name"] == "hello")
 
 
-# These are wrapper functions to widely used and tested python
-# libraries, what is being tested here is not their correctness,
-# but the wrapper functions'. ensuring their output is located in the
-# expected path.
 class FetchTests(unittest.TestCase):
     def test_http_download(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
@@ -41,7 +42,7 @@ class FetchTests(unittest.TestCase):
     def test_extract(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
         with utils.cd(test_path):
-            dir_name = fetch.extract("test_archive.tar.gz")
+            dir_name = fetch.extract("test_archive.tar.gz", keep_archive=True)
             self.assertTrue(os.path.isdir(dir_name))
 
             # cleanup
@@ -59,39 +60,17 @@ class FetchTests(unittest.TestCase):
             rmtree(dir_name)
 
 
-class PatchTests(unittest.TestCase):
-    """TODO"""
-
-
-class BuildTests(unittest.TestCase):
-    """TODO"""
-
-
 class InstallTests(unittest.TestCase):
     def test_file_copy(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
         with utils.cd(test_path):
-            file_name = ["hello_world.json"]
-            copied_dest = "new_directory"
+            file_name = "hello_world.json"
+            copied_dest = "new_file.json"
             install.file_copy(file_name, copied_dest)
-            self.assertTrue(os.path.isdir(copied_dest))
-            self.assertTrue(os.path.isfile(os.path.join(copied_dest, file_name[0])))
+            self.assertTrue(os.path.isfile(copied_dest))
 
             # cleanup
-            rmtree(copied_dest)
-
-    def test_file_copy_multiple(self):
-        test_path = os.path.dirname(os.path.realpath(__file__))
-        with utils.cd(test_path):
-            file_names = ["hello_world.json", "test_archive.tar.gz"]
-            copied_dest = "new_directory"
-            install.file_copy(file_names, copied_dest)
-            self.assertTrue(os.path.isdir(copied_dest))
-            for file_name in file_names:
-                self.assertTrue(os.path.isfile(os.path.join(copied_dest, file_name)))
-
-            # cleanup
-            rmtree(copied_dest)
+            os.remove(copied_dest)
 
 
 class UtilsTests(unittest.TestCase):
