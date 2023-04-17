@@ -15,6 +15,7 @@ Uses JSON configuration files that can define:
         "version": "",
         "definition": {
             "source": {
+                "required-files": [""],
                 "http-download": { "url": "",  "hash": ""},
                 "git-fetch": { "url": "", "branch": "" }
             },

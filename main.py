@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 from src import parse
 from src import fetch
 from src import patch
@@ -11,6 +12,16 @@ from src import service
 
 def fetching_step(source):
     try:
+        if "required-files" in source:
+            for path in source["required-files"]:
+                print(path)
+                print(os.path.exists(path))
+                if not os.path.exists(path):
+                    utils.error(
+                        "missing required files",
+                        f"{path} required by package but not present",
+                    )
+
         if "http-download" in source:
             http = source["http-download"]
             if "hash" in http:
