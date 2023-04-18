@@ -1,3 +1,3 @@
-import main
+import janus
 
-main.main()
+janus.main()
