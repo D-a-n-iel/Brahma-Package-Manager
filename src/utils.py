@@ -23,7 +23,7 @@ def find_in_sys_path(name):
         if name + ".json" in files:
             return os.path.join(".", name + ".json")
 
-    config_path = os.path.join(os.environ["XDG_CONFIG_HOME"], "brahma-configs")
+    config_path = os.path.join(os.environ["XDG_CONFIG_HOME"], "janus")
     for root, _, files in os.walk(config_path):
         if name + ".json" in files:
             return os.path.join(root, name + ".json")

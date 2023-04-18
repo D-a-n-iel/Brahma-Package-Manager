@@ -1,0 +1,18 @@
+{
+    "package": {
+        "name": "Janus",
+        "version" : "1.0",
+        "definition" : {
+            "source": {
+                "required-files": ["__main__.py", "janus.py", "src"]
+            },
+            "build": {
+                "commands": ["zip -r Janus.zip __main__.py main.py src", "sed -i '1i#!/usr/bin/env python3' Janus.zip"]
+            },
+            "install": {
+                "make-executable": ["Janus.zip"],
+                "file-copy": [{ "file": "Janus.zip", "destination": "/usr/bin/janus" }]
+            }
+        }
+    }
+}
