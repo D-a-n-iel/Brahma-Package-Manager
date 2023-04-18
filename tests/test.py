@@ -51,9 +51,7 @@ class FetchTests(unittest.TestCase):
     def test_git_fetch(self):
         test_path = os.path.dirname(os.path.realpath(__file__))
         with utils.cd(test_path):
-            dir_name = fetch.git_fetch(
-                "https://github.com/DDAVID22291/Brahma-Package-Manager"
-            )
+            dir_name = fetch.git_fetch("https://github.com/D-a-n-iel/janus")
             self.assertTrue(os.path.isdir(dir_name))
 
             # cleanup

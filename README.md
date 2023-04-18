@@ -1,11 +1,23 @@
-# Brahma-Package-Manager
+# Janus Package Manager
 A declarative package manager for Linux 
 
 ## How it works
 Uses JSON configuration files that can define:
 - A package
 - A service
-- A system installation
+
+## Installation
+
+To clone this repository and enter the source directory:
+```shell
+git clone https://github.com/D-a-n-iel/janus
+cd janus
+```
+
+Janus can then install itself!
+```shell
+python3 janus.py examples/janus.json
+```
 
 ## Config file schema
 ```json
