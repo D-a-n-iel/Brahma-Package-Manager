@@ -7,11 +7,18 @@ Uses JSON configuration files that can define:
 - A service
 
 ## Installation
+Janus depends on [Python](https://www.python.org/downloads/), [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), and the [GNU tool chain](https://www.nongnu.org/avr-libc/user-manual/install_tools.html).
+Most GNU/Linux systems are bundled with these. However, installation instructions for each can be found in the provided links.
 
 To clone this repository and enter the source directory:
 ```shell
 git clone https://github.com/D-a-n-iel/janus
 cd janus
+```
+
+To install the python dependencies:
+```shell
+pip install -r requirements.txt
 ```
 
 Janus can then install itself!
