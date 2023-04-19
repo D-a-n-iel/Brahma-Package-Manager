@@ -1,0 +1,43 @@
+{
+    "package": {
+        "name": "nginx.json",
+        "version": "1.24",
+        "definition": {
+            "source": {
+                "required-files": ["ALLOW_INSTALL"],
+                "http-download": {
+                    "url": "https://nginx.org/download/nginx-1.24.0.tar.gz",
+                    "hash": "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+                },
+                "git-fetch": {
+                    "url": "https://github.com/nginx/nginx",
+                    "branch": "release-1.24.0"
+                }
+            },
+            "patch": {
+                "replace-matches": [{
+                    "str1": "the nginx web server is successfully installed",
+                    "str2": "Janus successfully installed the nginx web server"
+                }],
+                "create-symlinks": [{ "src": "html/index.html", "dst": "index.html" }],
+                "commands": ["unlink index.html"]
+            },
+            "build": {
+                "prefix": "/usr/local/nginx",
+                "system": "gnu-build-system",
+                "commands": ["make"]
+            },
+            "install": {
+                "system": "gnu-make-install",
+                "make-executable": ["/usr/local/nginx/sbin/nginx"],
+                "file-copy": [{ "file": "html/index.html", "destination": "/usr/local/nginx/html/index.html" }],
+                "commands": ["rm /usr/local/nginx/logs/error.log"]
+            },
+            "service": {
+                "start-commands": [["/usr/local/nginx/sbin/nginx"]],
+                "stop-commands": [["/usr/local/nginx/sbin/nginx", "-s", "stop"]],
+                "restart-commands": [["/usr/local/nginx/sbin/nginx", "-s", "reload"]]
+            }
+        }
+    }
+}
