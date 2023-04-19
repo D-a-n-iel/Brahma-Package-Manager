@@ -79,6 +79,7 @@ These commands would in turn restart the currently running nginx web server, and
                 "commands": [""]
             },
             "build": {
+                "prefix": "",
                 "system": "",
                 "commands": [""]
             },
