@@ -88,7 +88,7 @@ These commands would in turn restart the currently running nginx web server, and
                 "make-executable": [""],
                 "file-copy": [{ "file": "", "destination": "" }],
                 "commands": [""]
-            }
+            },
             "service": {
                 "start-commands": [[""]],
                 "stop-commands": [[""]],
