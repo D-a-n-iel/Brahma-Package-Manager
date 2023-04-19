@@ -14,8 +14,6 @@ def fetching_step(source):
     try:
         if "required-files" in source:
             for path in source["required-files"]:
-                print(path)
-                print(os.path.exists(path))
                 if not os.path.exists(path):
                     utils.error(
                         "missing required files",
