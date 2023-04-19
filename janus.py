@@ -50,12 +50,12 @@ def patching_step(patch_steps, patch_dir):
                 for x in patch_steps["replace-matches"]:
                     patch.replace_matches(patch_dir, x["str1"], x["str2"])
             if "create-symlinks" in patch_steps:
-                for x in patch_steps["replace-matches"]:
+                for x in patch_steps["create-symlinks"]:
                     patch.create_symlink(x["src"], x["dst"])
             if "commands" in patch_steps:
                 patch.patch_commands(patch_steps["commands"])
-    except KeyError:
-        utils.error("Error: malformed patch section")
+    except KeyError as e:
+        utils.error("malformed patch section")
 
 
 def building_step(build_steps, build_dir):
@@ -64,7 +64,6 @@ def building_step(build_steps, build_dir):
             if "system" in build_steps:
                 system = build_steps["system"]
                 if system == "gnu-build-system":
-                    print(build_steps)
                     if "prefix" in build_steps:
                         build.run_gnu_build_system(build_steps["prefix"])
                     else:
