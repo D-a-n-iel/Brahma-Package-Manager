@@ -1,0 +1,19 @@
+{
+    "package": {
+        "name": "ed",
+        "version" : "latest",
+        "description": "The standard editor!",
+        "definition" : {
+            "source": {
+                "git-fetch": { "url": "https://github.com/Distrotech/ed" }
+            },
+            "build": {
+                "system": "gnu-build-system",
+                "prefix": "build"
+            },
+            "install": {
+                "system": "gnu-make-install"
+            }
+        }
+    }
+}
